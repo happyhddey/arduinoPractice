@@ -14,4 +14,5 @@ arduinoPractice
 ㄴㄴled_on_off.ino: red, blue led를 자동으로 번갈아가며 켜기
 ㄴㄴled_RGP_w_serial.ino: 문자를 입력받은대로 red, blue led를 조작하여 해당 색깔 구현
 ㄴㄴcounter_with_switch.ino: 전선을 연결할 때마다 segments에 전선이 연결된 횟수가 뜸
+ㄴㄴplus_master.ino: 빠르게 보여지는 숫자의 합을 맞추는 게임
 ```
