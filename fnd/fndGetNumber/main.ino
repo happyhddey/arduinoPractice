@@ -5,7 +5,7 @@
 
 int digitPins[] = {10, 11, 12, 13};
 int segmentPins[] = {2, 3, 4, 5, 6, 7, 8, 9};
-int number = 1987;
+int number = 0;
 
 
 void setup() {
@@ -40,23 +40,46 @@ void SetOffDigit(int* digitPins){
 }
 
 
+int IntegerProcess(int i){
+    /*
+    - 4자리 수
+    - 음수일 경우 절대값
+    */
+    int number = i;
+    if (number < 0) {
+        number = -i;    
+    }
+    number %= 10000;
+    return number;
+}
+
+
 void loop() {
+
+    /*
+    숫자 입력 받아서 fnd에 출력
+    */
 
     if (Serial.available()) {
         String s = Serial.readString();
         s.trim();
         Println(s);
         number = s.toInt();
-        Print(number);
+        number = IntegerProcess(number);
+        Println(number);
     }
 
     int num = number;
+    bool isDigitExist = (number >= 0);
     for (int i=3; i>=0; i--){
-        FndTurnOnNumberAn(num % 10, segmentPins);
-        SetOnDigit(i, digitPins);
+        if (isDigitExist){
+            FndTurnOnNumberAn(num % 10, segmentPins);
+            SetOnDigit(i, digitPins);
+        }
         Wait(3);
         FndTurnOffAn(segmentPins);
         SetOffDigit(digitPins);
+        isDigitExist = (num/10 > 0);
         num /= 10;
     }
 
